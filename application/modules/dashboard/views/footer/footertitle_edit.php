@@ -19,8 +19,7 @@
     <label for="c_designation" class="col-sm-3"><?php echo display('description') ?> <i class="text-danger">
             *</i></label>
     <div class="col-sm-9">
-        <label class="form-control bg-red text-white"
-            id="terms_label"><?php echo "Please use \".\" for new line in invoice terms and condition." ?></label>
+        <label class="form-control bg-red text-white" id="terms_label"><?php echo "Please use \".\" for new line in invoice terms and condition." ?></label>
         <textarea name="c_designation" type="text" class="form-control" id="footer_c_designation" rows="7"
             placeholder="<?php echo display('designation') ?>"><?php echo html_escape($teammember_edit->widget_desc); ?></textarea>
     </div>

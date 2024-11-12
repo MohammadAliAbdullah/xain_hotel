@@ -3068,7 +3068,7 @@ function footertitle_edit(company_id) {
             $(".modal_ttl").html("Footer Information");
             $("#footer").html(r);
             $("#footer_info").modal('show');
-            if(company_id==21){
+            if(company_id==21 || company_id==38){
                 $("#terms_label").attr("hidden", false);
             }else{
                 $("#terms_label").attr("hidden", true);

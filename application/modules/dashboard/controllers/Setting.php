@@ -1113,6 +1113,7 @@ class Setting extends MX_Controller {
         $data['title'] = "checkout";
 		$data['team_title'] = $this->db->select('*')->from('tbl_widget')->where('widgetid',20)->get()->row();
 		$data['team_title1'] = $this->db->select('*')->from('tbl_widget')->where('widgetid',21)->get()->row();
+		$data['team_title2'] = $this->db->select('*')->from('tbl_widget')->where('widgetid',38)->get()->row();
 		$data['social'] = $this->db->select('*')->from('tbl_slider')->where('sltypeid',15)->get()->result();
 		$data['pagetitle'] = $this->db->select('*')->from('page_title')->get()->result();
 
