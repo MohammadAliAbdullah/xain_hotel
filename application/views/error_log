@@ -1,0 +1,4 @@
+[22-Feb-2024 18:05:48 UTC] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /home/hotelbdtaskdemo/public_html/xainhotel/application/views/index.php:1
+Stack trace:
+#0 {main}
+  thrown in /home/hotelbdtaskdemo/public_html/xainhotel/application/views/index.php on line 1

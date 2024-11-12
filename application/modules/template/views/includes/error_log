@@ -1,0 +1,4 @@
+[07-Oct-2022 13:21:11 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function base_url() in /home/hotelbdtaskdemo/public_html/xainhotel/application/modules/template/views/includes/sidebar.php:28
+Stack trace:
+#0 {main}
+  thrown in /home/hotelbdtaskdemo/public_html/xainhotel/application/modules/template/views/includes/sidebar.php on line 28
