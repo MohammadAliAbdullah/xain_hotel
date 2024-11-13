@@ -1,4 +1,59 @@
 //atnview
+// abdullah add date to  #13-11-2024#
+$(document).on('click', '#sign_in', function (e) {
+  e.preventDefault();
+  // Get CSRF token, base URL, and employee ID
+  var csrf = $('#csrf_token').val();
+  var baseurl = $('#base_url').val() + 'hrm/Home/create_atten';
+  var employee_id = $('#employee_id').val();
+
+  // Check if employee ID is provided
+  if (employee_id == '') {
+    alert('Employee ID is required.');
+    return false;
+  }
+
+  // First AJAX request to check attendance status
+  $.ajax({
+    url: baseurl,
+    type: "POST",
+    data: {
+      csrf_test_name: csrf,
+      employee_id: employee_id,
+      sign_out: 1,
+    },
+    dataType: "json", // Assuming the server returns JSON
+    success: function (response) {
+      if (response.status === 'checked') {
+        // Show confirmation prompt
+        swal({
+            title: "Confirmation",
+            text: "Are you sure you want to submit?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#28a745",
+            confirmButtonText: "Yes",
+            cancelButtonText: "No",
+            closeOnConfirm: true,
+            closeOnCancel: true
+          },
+          function (isConfirm) {
+            if (isConfirm) {
+              submitAttendance(csrf, employee_id, baseurl);
+            } else {
+              // Reload the page to reset the form
+              window.location.reload();
+            }
+          });
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error('First AJAX Error:', error);
+      alert('Something went wrong during the check. Please try again.');
+    }
+  });
+});
+
 function signoutmodal(id, signin) {
   'use strict';
   $("#signout").modal('show');
@@ -87,3 +142,42 @@ function startTime() {
   }, 500);
 }
 startTime();
+// abdullah add date to  #13-11-2024# Function to handle the second AJAX request
+function submitAttendance(csrf, employee_id, baseurl) {
+  $.ajax({
+    url: baseurl,
+    type: "POST",
+    data: {
+      csrf_test_name: csrf,
+      employee_id: employee_id,
+    },
+    dataType: "json", // Assuming the server returns JSON
+    success: function (res) {
+      if (res.status === 'success') {
+        swal({
+          title: "Successfully",
+          text: "Attendance has been submitted successfully.",
+          type: "success",
+          confirmButtonColor: "#28a745",
+          confirmButtonText: "Ok",
+          closeOnConfirm: true
+        });
+        window.location.reload();
+      } else {
+        swal({
+          title: "Failed",
+          text: "Failed to submit attendance. Please try again.",
+          type: "error",
+          confirmButtonColor: "#28a745",
+          confirmButtonText: "Ok",
+          closeOnConfirm: true
+        });
+        window.location.reload();
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error('Second AJAX Error:', error);
+      alert('Something went wrong during submission. Please try again.');
+    }
+  });
+}
