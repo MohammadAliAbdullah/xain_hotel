@@ -1,0 +1,2 @@
+-- 12-11-2024
+INSERT INTO `tbl_widget` (`widgetid`, `widget_name`, `widget_title`, `widget_desc`) VALUES (NULL, 'Terms for website', 'Conditions', 'Please use. for new line in invoice. terms and condition.');

@@ -30,13 +30,16 @@ if (!function_exists('display')) {
         $setting_table = 'setting';
         $default_lang  = 'english';
 
-        //set language  
+        // set language
         $data = $ci->db->get($setting_table)->row();
-        if (!empty($data->language)) {
-            $language = $data->language; 
-        } else {
-            $language = $default_lang; 
-        } 
+        $language = $ci->session->userdata('web_language'); 
+        if (empty($language)) {
+            if (!empty($data->language)) {
+                $language = $data->language;
+            } else {
+                $language = $default_lang;
+            }
+        }
  
         if (!empty($text)) {
 

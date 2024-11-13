@@ -1555,4 +1555,21 @@ public function subscribe(){
 
 		redirect('hotel/successful/' . $orderid . '/' . 8);
 	}
+	// language update language column in settings table
+	public function update_language()
+	{
+		$lang = $this->input->post('language', true);
+	
+		if ($lang) {
+			// Update the language in the database
+			// $this->db->where('id', 2)->update('setting', array('language' => $lang));
+			$this->session->set_userdata('web_language', $lang);
+			// Return the updated language code as a response
+			echo $lang;
+		} else {
+			echo ''; // Return an empty response if no language is set
+		}
+	}
+	
+	
 }
