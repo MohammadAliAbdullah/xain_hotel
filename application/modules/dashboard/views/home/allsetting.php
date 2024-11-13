@@ -185,9 +185,16 @@
                                         aria-selected="false"><?php echo display("checkout"); ?></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" onclick="getfooter()" id="v-pills-footer-tab" data-toggle="pill"
-                                        href="#v-pills-footer" role="tab" aria-controls="v-pills-footer"
-                                        aria-selected="false"><?php echo display("footer"); ?></a>
+                                    <a class="nav-link" onclick="getfooter()" id="v-pills-footer-tab" data-toggle="pill" href="#v-pills-footer" role="tab" aria-controls="v-pills-footer"
+                                        aria-selected="false"><?php echo display("footer"); ?>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="getfactoryrest()" id="v-pills-factory-tab" data-toggle="pill"
+                                        href="#v-pills-factory" role="tab" aria-controls="v-pills-factory" aria-selected="false">
+                                        <?php // echo display("factory"); ?> 
+                                        Factory rest
+                                    </a>
                                 </li>
                             </ul>
                         </div>

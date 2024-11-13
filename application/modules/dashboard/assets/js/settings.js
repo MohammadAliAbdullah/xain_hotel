@@ -3055,6 +3055,22 @@ function getfooter() {
         }
     });
 }
+function getfactoryrest() {
+    $(".content-loder").show();
+    var base_url = $("#base_url").val();
+    var CSRF_TOKEN = $('#csrf_token').val();
+    $.ajax({
+        url: base_url + "footer",
+        type: "POST",
+        data: {'csrf_test_name': CSRF_TOKEN},
+        success: function (r) {
+            setTimeout(function () {
+                $(".content-loder").hide();
+            }, 50);
+            $(".footer_show").html(r);
+        }
+    });
+}
 
 "use strict";
 function footertitle_edit(company_id) {
