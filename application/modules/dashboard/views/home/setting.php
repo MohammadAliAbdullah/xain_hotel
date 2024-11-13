@@ -3,7 +3,7 @@
         <div class="card">
             <h4 class="card-header"><?php echo html_escape((!empty($title) ? $title : null)) ?></h4>
             <div class="card-body">
-                <?php echo form_open_multipart('dashboard/setting/create', 'class="form-inner"'); ?>
+                <?php echo form_open_multipart('dashboard/setting/create_new', 'class="form-inner"'); ?>
                 <?php echo form_hidden('id', $setting->id) ?>
 
                 <div class="form-group row">
@@ -31,7 +31,6 @@
                             value="<?php echo html_escape($setting->address) ?>">
                     </div>
                 </div>
-
                 <div class="form-group row">
                     <label for="email" class="col-sm-3 col-form-label"><?php echo display('email') ?></label>
                     <div class="col-sm-6">
@@ -40,7 +39,6 @@
                             value="<?php echo html_escape($setting->email) ?>">
                     </div>
                 </div>
-
                 <div class="form-group row">
                     <label for="phone" class="col-sm-3 col-form-label"><?php echo display('phone') ?></label>
                     <div class="col-sm-6">
@@ -49,7 +47,6 @@
                             value="<?php echo html_escape($setting->phone) ?>">
                     </div>
                 </div>
-                <!-- if setting favicon is already uploaded -->
                 <?php if (!empty($setting->favicon)) {  ?>
                     <div class="form-group row">
                         <label for="faviconPreview" class="col-sm-3 col-form-label"></label>
@@ -499,7 +496,17 @@
                             rows="7"><?php echo html_escape($setting->footer_text) ?></textarea>
                     </div>
                 </div>
-
+                <div class="form-group row">
+                    <label for="footer_text"
+                        class="col-sm-3 col-form-label"><?php echo display('is_use_website') ?></label>
+                    <div class="col-sm-6">
+                        <select name="use_web_status" id="use_web_status" class="form-control">
+                            <option value="">--Selected--</option>
+                            <option value="1" <?php echo $setting->use_web_status ==1 ? 'selected': ''; ?>>Yes/ Use website</option>
+                            <option value="0" <?php echo $setting->use_web_status ==0 ? 'selected': ''; ?>>No/ Not use website</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group row text-right">
                     <label for="footer_text" class="col-sm-3 col-form-label"></label>
                     <div class="col-sm-6">

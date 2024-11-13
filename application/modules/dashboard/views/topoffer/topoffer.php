@@ -4,7 +4,7 @@
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h6 class="mb-0"><?php echo display("home_section_3"); ?></h6>
                 <div class="d-flex align-items-center">
-                    <label class="mb-0 me-2">Is Home Page</label>
+                    <label class="mb-0 me-2"><?php echo display('visible_home'); ?></label>
                     <input type="checkbox" class="form-check-input" id="visible_status" onclick="top_offer_visible_home()" <?php echo $visible_status ? 'checked' : ''; ?>>
                 </div>
             </div>

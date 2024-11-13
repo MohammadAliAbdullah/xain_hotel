@@ -122,10 +122,132 @@ class Setting extends MX_Controller
             'site_align'  => $this->input->post('site_align', TRUE),
             'pricetxt' => $this->input->post('pricetxt', TRUE),
             'powerbytxt' => $this->input->post('power_text', TRUE),
-            'footer_text' => $this->input->post('footer_text', TRUE)
+            'footer_text' => $this->input->post('footer_text', TRUE),
+            'use_web_status' => $this->input->post('use_web_status', TRUE)
         );
         if ($this->form_validation->run() === true) {
+            #if empty $id then insert data
+            if (empty($postData['id'])) {
+                if ($this->setting_model->create($postData)) {
+                    #set success message
+                    $this->session->set_flashdata('message', display('save_successfully'));
+                } else {
+                    #set exception message
+                    $this->session->set_flashdata('exception', display('please_try_again'));
+                }
+            } else {
+                if ($this->setting_model->update($postData)) {
+                    #set success message
+                    $this->session->set_flashdata('message', display('update_successfully'));
+                } else {
+                    #set exception message
+                    $this->session->set_flashdata('exception', display('please_try_again'));
+                }
+            }
 
+            redirect('settings/2');
+        } else {
+            $data['languageList'] = $this->languageList();
+            $data['currencyList'] = $this->setting_model->currencyList();
+            $data['module'] = "dashboard";
+            $data['page']   = "home/setting";
+            echo Modules::run('template/layout', $data);
+        }
+    }
+    public function create_new()
+    {
+        $data['title'] = display('application_setting');
+        $this->form_validation->set_rules('title', display('application_title'), 'required|max_length[50]|xss_clean');
+        $this->form_validation->set_rules('address', display('address'), 'max_length[255]|xss_clean');
+        $this->form_validation->set_rules('email', display('email'), 'max_length[100]|valid_email|xss_clean');
+        $this->form_validation->set_rules('phone', display('phone'), 'max_length[20]|xss_clean');
+        $this->form_validation->set_rules('language', display('language'), 'max_length[250]|xss_clean');
+        $this->form_validation->set_rules('footer_text', display('footer_text'), 'max_length[255]|xss_clean');
+        $this->form_validation->set_rules('currency', display('currency'), 'required|xss_clean');
+        $this->form_validation->set_rules('timezone', display('timezone'), 'required|xss_clean');
+        //logo upload
+        $logo = $this->fileupload->do_upload(
+            'assets/img/icons/',
+            'logo'
+        );
+        // if logo is uploaded then resize the logo
+        if ($logo !== false && $logo != null) {
+            $this->fileupload->do_resize(
+                $logo,
+                210,
+                48
+            );
+        }
+        //if logo is not uploaded
+        if ($logo === false) {
+            $this->session->set_flashdata('exception', "Please Upload a Valid Image");
+        }
+
+        //logo Splash image
+        $splashimg = $this->fileupload->do_upload(
+            'assets/img/icons/',
+            'splash_logo'
+        );
+        // if Splash image is uploaded then resize the Splash image
+        if ($splashimg !== false && $splashimg != null) {
+            $this->fileupload->do_resize(
+                $splashimg,
+                500,
+                500
+            );
+        }
+        //if Splash image is not uploaded
+        if ($splashimg === false) {
+            $this->session->set_flashdata('exception', "Please Upload a Valid Image");
+        }
+
+
+        //favicon upload
+        $favicon = $this->fileupload->do_upload(
+            'assets/img/icons/',
+            'favicon'
+        );
+        // if favicon is uploaded then resize the favicon
+        if ($favicon !== false && $favicon != null) {
+            $this->fileupload->do_resize(
+                $favicon,
+                32,
+                32
+            );
+        }
+        //if favicon is not uploaded
+        if ($favicon === false) {
+            $this->session->set_flashdata('exception', "Please Upload a Valid Image");
+        }
+        $data['setting'] = (object)$postData = array(
+            'id'          => $this->input->post('id', TRUE),
+            'storename'   => $this->input->post('stname', TRUE),
+            'title'       => $this->input->post('title', TRUE),
+            'address' => $this->input->post('address', TRUE),
+            'email'       => $this->input->post('email', TRUE),
+            'phone'       => $this->input->post('phone', TRUE),
+            'logo'           => (!empty($logo) ? $logo : $this->input->post('old_logo', TRUE)),
+            'splash_logo' => (!empty($splashimg) ? $splashimg : $this->input->post('splash_logo', TRUE)),
+            'favicon'       => (!empty($favicon) ? $favicon : $this->input->post('old_favicon', TRUE)),
+            'vat'          => $this->input->post('storevat', TRUE),
+            'servicecharge' => $this->input->post('scharge', TRUE),
+            'country'     => $this->input->post('country', TRUE),
+            'map_key'     => $this->input->post('map_key', TRUE),
+            'latitude'     => $this->input->post('latitude', TRUE),
+            'longitude'     => $this->input->post('longitude', TRUE),
+            'currency'      => $this->input->post('currency', TRUE),
+            'language'    => $this->input->post('language', TRUE),
+            'dateformat' => $this->input->post('timeformat', TRUE),
+            'timezone' => $this->input->post('timezone', TRUE),
+            'checkintime' => $this->input->post('checkintime', TRUE),
+            'checkouttime' => $this->input->post('checkouttime', TRUE),
+            'site_align'  => $this->input->post('site_align', TRUE),
+            'pricetxt' => $this->input->post('pricetxt', TRUE),
+            'powerbytxt' => $this->input->post('power_text', TRUE),
+            'footer_text' => $this->input->post('footer_text', TRUE),
+            'use_web_status' => $this->input->post('use_web_status', TRUE)
+        );
+        if ($this->form_validation->run() === true) {
             #if empty $id then insert data
             if (empty($postData['id'])) {
                 if ($this->setting_model->create($postData)) {
