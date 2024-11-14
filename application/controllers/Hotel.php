@@ -39,9 +39,10 @@ class Hotel extends CI_Controller
 
 	public function index()
 	{
-		$web_visible_status = $this->db->select('use_web_status')->from('setting')->where('id', 2)->get()->row('use_web_status');
-		// if web_visible_status false then return login
-		if ($web_visible_status == 0) {
+		$data['visibilities'] = $this->db->select('top_offer_visible_status, use_web_status, blog_offer_visible_status, home_about_visible_status')->from('setting')->where('id', 2)->get()->row();
+
+		// if web_visibilities false then return login
+		if ($data['visibilities']->use_web_status == 0) {
 			// flash message
 			$this->session->set_flashdata('exception', 'Web is currently disabled. Please try again later.');
 			redirect('dashboard/home');

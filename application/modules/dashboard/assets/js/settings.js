@@ -3243,7 +3243,7 @@ function getfactoryrest() {
     var base_url = $("#base_url").val();
     var CSRF_TOKEN = $('#csrf_token').val();
     $.ajax({
-        url: base_url + "footer",
+        url: base_url + "dashboard/setting/factory_rest",
         type: "POST",
         data: {
             'csrf_test_name': CSRF_TOKEN
@@ -3252,7 +3252,7 @@ function getfactoryrest() {
             setTimeout(function () {
                 $(".content-loder").hide();
             }, 50);
-            $(".footer_show").html(r);
+            $(".factory_show").html(r);
         }
     });
 }
@@ -3472,16 +3472,17 @@ function page_title_update(teammember_id) {
     });
 };
 
-function top_offer_visible_home() {
+function visible_home(element, field) {
     var base_url = $("#base_url").val();
     var CSRF_TOKEN = $('#csrf_token').val();
-    var isChecked = $("#visible_status").prop('checked') ? 1 : 0;
+    var isChecked = $(element).prop('checked') ? 1 : 0; 
 
     $.ajax({
-        url: base_url + "dashboard/setting/top_offer_visible_home",
+        url: base_url + "dashboard/setting/visible_home",
         type: "POST",
         data: {
             'csrf_test_name': CSRF_TOKEN,
+            'field': field,
             'status': isChecked
         },
         success: function (r) {

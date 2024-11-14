@@ -411,7 +411,7 @@ class Autoupdate extends MX_Controller {
 
     }
  public function download_backup() {
-        $db_name = 'backup' . '.sql';
+        $db_name = 'db_backup_' . date('Y-m-d_H-i-s') . '.sql';
 		$path='assets/data/backup/' . $db_name;
 		if(!is_file($path)){
 			$contents = 'This is a test!';          

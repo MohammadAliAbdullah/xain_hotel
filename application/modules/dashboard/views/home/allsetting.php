@@ -192,8 +192,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" onclick="getfactoryrest()" id="v-pills-factory-tab" data-toggle="pill"
                                         href="#v-pills-factory" role="tab" aria-controls="v-pills-factory" aria-selected="false">
-                                        <?php // echo display("factory"); ?> 
-                                        Factory rest
+                                        <?php echo display("factory_rest"); ?>
                                     </a>
                                 </li>
                             </ul>
@@ -445,20 +444,20 @@
                                             <select name="menuid" class="form-control" id="menuid">
                                                 <option value="" selected disabled><?php echo display('sub_menu') ?>
                                                 </option>
-                                                <?php if(isset($allmenu )){ ?>
-                                                <?php foreach ($allmenu as $menu) { ?>
-                                                <option value="<?php echo html_escape($menu->menuid); ?>"
-                                                    class='bolden'>
-                                                    <strong><?php echo html_escape($menu->menu_name); ?></strong>
-                                                </option>
-                                                <?php if (!empty($menu->sub)) {
-                                                        foreach ($menu->sub as $submenu) { ?>
-                                                <option value="0">
-                                                    &nbsp;&nbsp;&nbsp;&mdash;<?php echo html_escape($submenu->menu_name); ?>
-                                                </option>
-                                                <?php }
-                                                    }
-                                                } ?>
+                                                <?php if (isset($allmenu)) { ?>
+                                                    <?php foreach ($allmenu as $menu) { ?>
+                                                        <option value="<?php echo html_escape($menu->menuid); ?>"
+                                                            class='bolden'>
+                                                            <strong><?php echo html_escape($menu->menu_name); ?></strong>
+                                                        </option>
+                                                        <?php if (!empty($menu->sub)) {
+                                                            foreach ($menu->sub as $submenu) { ?>
+                                                                <option value="0">
+                                                                    &nbsp;&nbsp;&nbsp;&mdash;<?php echo html_escape($submenu->menu_name); ?>
+                                                                </option>
+                                                    <?php }
+                                                        }
+                                                    } ?>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -591,7 +590,7 @@
                             </div>
                             <div class="tab-pane fade" id="v-pills-gallery" role="tabpanel"
                                 aria-labelledby="v-pills-gallery-tab">
-                                <h4><?php echo display("ad")." ".display("gallery"); ?></h4>
+                                <h4><?php echo display("ad") . " " . display("gallery"); ?></h4>
                                 <br>
                                 <div class="form-group row">
                                     <label for="name" class="col-sm-2 gallery-inp-hi"><?php echo display('name') ?><span
@@ -646,7 +645,7 @@
                             </div>
                             <div class="tab-pane fade" id="v-pills-slider" role="tabpanel"
                                 aria-labelledby="v-pills-slider-tab">
-                                <h4><?php echo display("ad")." ".display("slider")." ".display("Image") ?></h4>
+                                <h4><?php echo display("ad") . " " . display("slider") . " " . display("Image") ?></h4>
                                 <br>
                                 <div class="form-group row">
                                     <label for="title" class="col-sm-2 gallery-inp-hi"><?php echo display("image_size") ?> <span
@@ -755,6 +754,15 @@
                                 <div class="offset-4 mb-3 group-end">
                                     <a class="btn btn-danger btnPrevious" id="v-pills-checkout-tab" data-toggle="pill"
                                         href="#v-pills-checkout"><?php echo display('previous'); ?></a>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-factory" role="tabpanel"
+                                aria-labelledby="v-pills-factory-tab">
+                                <div class="factory_show"></div><br>
+                                <div class="offset-4 mb-3 group-end">
+                                    <a class="btn btn-danger btnPrevious" id="v-pills-checkout-tab" data-toggle="pill"
+                                        href="#v-pills-checkout"><?php echo display('previous'); ?>
+                                    </a>
                                 </div>
                             </div>
                         </div>

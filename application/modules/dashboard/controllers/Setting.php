@@ -894,6 +894,7 @@ class Setting extends MX_Controller
     public function homeabout()
     {
         $data['title'] = "homeabout";
+        $data['visible_status'] = $this->db->select('home_about_visible_status')->from('setting')->where('id', 2)->get()->row('home_about_visible_status');
         $data['team_title'] = $this->db->select('*')->from('tbl_widget')->where('widgetid', 3)->get()->row();
         $data['team_title1'] = $this->db->select('*')->from('tbl_widget')->where('widgetid', 6)->get()->row();
         $data['company_list'] = $this->db->select('*')->from('tbl_slider')->where('sltypeid', 2)->get()->result();
@@ -1052,6 +1053,7 @@ class Setting extends MX_Controller
     public function blogoffer()
     {
         $data['title'] = "blogoffer";
+        $data['visible_status'] = $this->db->select('blog_offer_visible_status')->from('setting')->where('id', 2)->get()->row('blog_offer_visible_status');
         $data['team_title'] = $this->db->select('*')->from('tbl_widget')->where('widgetid', 29)->get()->row();
         $data['team1_title'] = $this->db->select('*')->from('tbl_widget')->where('widgetid', 5)->get()->row();
         $data['company_list'] = $this->db->select('*')->from('tbl_slider')->where('sltypeid', 4)->get()->result();
@@ -1300,6 +1302,34 @@ class Setting extends MX_Controller
 
         $this->load->view('footer/footer', $data);
     }
+    public function factory_rest()
+    {
+        $data['title'] = "checkout";
+        $data['team_title'] = $this->db->select('*')->from('tbl_widget')->where('widgetid', 20)->get()->row();
+        $data['team_title1'] = $this->db->select('*')->from('tbl_widget')->where('widgetid', 21)->get()->row();
+        $data['team_title2'] = $this->db->select('*')->from('tbl_widget')->where('widgetid', 38)->get()->row();
+        $data['social'] = $this->db->select('*')->from('tbl_slider')->where('sltypeid', 15)->get()->result();
+        $data['pagetitle'] = $this->db->select('*')->from('page_title')->get()->result();
+
+        $this->load->view('factory_rest/factory_rest', $data);
+    }
+
+    public function truncate_table()
+    {
+        $table = $this->input->post('table');
+        if (!empty($table)) {
+            if ($this->db->table_exists($table)) {
+                $this->db->truncate($table);
+                echo json_encode(['status' => 'success']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Table does not exist']);
+            }
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'No table specified']);
+        }
+    }
+
+
     public function footertitle_edit()
     {
         $data['title'] = 'footer';
@@ -1379,10 +1409,21 @@ class Setting extends MX_Controller
             echo '<h5>Error</h5>Please Try Again';
         }
     }
-    public function top_offer_visible_home()
+    public function visible_home()
     {
         $status = $this->input->post('status', true);
-        $update = $this->db->where("id", 2)->update("setting", array("top_offer_visible_status" => $status));
-        echo 'Updated Successfully';
+        $field = (string) $this->input->post('field', true); 
+        // Create the data array dynamically using the field as the key
+        $data = array($field => $status);
+        // Update the database with the dynamic field name
+        $update = $this->db->where("id", 2)->update("setting", $data);
+    
+        // Check if the update was successful
+        if ($update) {
+            echo 'Updated Successfully';
+        } else {
+            echo 'Update Failed';
+        }
     }
+    
 }

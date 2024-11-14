@@ -203,58 +203,58 @@
     </div>
 </div>
 <!-- /.End of feature -->
-<div class="section section-about">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-5 col-md-6 col-12">
-                <?php foreach ($banner_homemiddle as $homemiddle) { ?>
-                    <div class="position-relative">
-                        <img src="<?php echo base_url() . html_escape(!empty($homemiddle->image) ? $homemiddle->image : 'assets/img/Home-page/below_slider.png'); ?>"
-                            class="rounded img-fluid mx-auto d-block" alt="">
-                        <div class="play-icon">
-                            <a href="<?php echo html_escape($homemiddle->slink); ?>" class="play-btn video-play-icon">
-                                <i class="mdi mdi-play text-primary rounded-circle bg-white shadow"></i>
-                            </a>
-                        </div>
-                    </div>
-                <?php } ?>
-            </div>
-            <!--end col-->
 
-            <div class="col-lg-7 col-md-6 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                <div class="ml-lg-5 ml-md-4">
-                    <div class="section-title">
-                        <?php $hmd = $this->db->select('*')->from('tbl_widget')->where('widgetid', 3)->get()->row(); ?>
-                        <span class="badge badge-pill badge-soft-primary"><?php echo display('about') ?></span>
-                        <h4 class="title mt-3 mb-4"><span
-                                class="text-primary"><?php echo html_escape($hmd->widget_title); ?></span></h4>
-                        <p class="text-muted para-desc mx-auto mb-0">
-                            <?php echo html_escape($hmd->widget_desc); ?></p>
-                        <div class="mt-4">
-                            <a href="#" class="btn btn-primary"><?php echo display('learn_more') ?></a>
+<?php if ($visibilities->home_about_visible_status): ?>
+    <div class="section section-about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 col-md-6 col-12">
+                    <?php foreach ($banner_homemiddle as $homemiddle) { ?>
+                        <div class="position-relative">
+                            <img src="<?php echo base_url() . html_escape(!empty($homemiddle->image) ? $homemiddle->image : 'assets/img/Home-page/below_slider.png'); ?>"
+                                class="rounded img-fluid mx-auto d-block" alt="">
+                            <div class="play-icon">
+                                <a href="<?php echo html_escape($homemiddle->slink); ?>" class="play-btn video-play-icon">
+                                    <i class="mdi mdi-play text-primary rounded-circle bg-white shadow"></i>
+                                </a>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-7 col-md-6 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                    <div class="ml-lg-5 ml-md-4">
+                        <div class="section-title">
+                            <?php $hmd = $this->db->select('*')->from('tbl_widget')->where('widgetid', 3)->get()->row(); ?>
+                            <span class="badge badge-pill badge-soft-primary"><?php echo display('about') ?></span>
+                            <h4 class="title mt-3 mb-4"><span
+                                    class="text-primary"><?php echo html_escape($hmd->widget_title); ?></span></h4>
+                            <p class="text-muted para-desc mx-auto mb-0">
+                                <?php echo html_escape($hmd->widget_desc); ?></p>
+                            <div class="mt-4">
+                                <a href="#" class="btn btn-primary"><?php echo display('learn_more') ?></a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--end col-->
+                <!--end col-->
 
+            </div>
         </div>
     </div>
-</div>
-
-
-
-<div class="section container rounded join-content box-shadow mb-5 shadow">
-    <div class="text-center col-middle">
-        <?php $joinus = $this->db->select('*')->from('tbl_widget')->where('widgetid', 6)->get()->row(); ?>
-        <h2 class="fs-32 text-white mb-4 "><?php echo html_escape($joinus->widget_desc); ?></h2>
-        <a href="<?php echo base_url(); ?>user/login"
-            class="btn btn-outline-white mr-3"><?php echo display('sign_in') ?></a>
-        <a href="<?php echo base_url(); ?>register" class="btn btn-white"><?php echo display('join_us') ?></a>
+    <div class="section container rounded join-content box-shadow mb-5 shadow">
+        <div class="text-center col-middle">
+            <?php $joinus = $this->db->select('*')->from('tbl_widget')->where('widgetid', 6)->get()->row(); ?>
+            <h2 class="fs-32 text-white mb-4 "><?php echo html_escape($joinus->widget_desc); ?></h2>
+            <a href="<?php echo base_url(); ?>user/login"
+                class="btn btn-outline-white mr-3"><?php echo display('sign_in') ?></a>
+            <a href="<?php echo base_url(); ?>register" class="btn btn-white"><?php echo display('join_us') ?></a>
+        </div>
     </div>
-</div>
+<?php endif; ?>
 <!-- /.End of join box -->
-<?php if ($visible_status): ?>
+<?php if ($visibilities->top_offer_visible_status): ?>
     <div class="section bg-gray">
         <div class="container">
             <div class="row">
@@ -288,43 +288,45 @@
             </div>
         </div>
     </div>
-<?php endif; ?>
-<?php $destination = $this->db->select('*')->from('tbl_widget')->where('widgetid', 5)->get()->row(); ?>
-<div class="section section-destination">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 offset-md-1">
-                <div class="section-title text-center mb-5 col-middle">
-                    <h2 class="block-title fs-25 mb-2 font-weight-bold">
-                        <?php echo html_escape($destination->widget_title); ?></h2>
-                    <div class="sub-title fs-18">
-                        <?php echo html_escape($destination->widget_desc); ?>
+<?php endif;
+$destination = $this->db->select('*')->from('tbl_widget')->where('widgetid', 5)->get()->row();
+if ($visibilities->blog_offer_visible_status):
+?>
+    <div class="section section-destination">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="section-title text-center mb-5 col-middle">
+                        <h2 class="block-title fs-25 mb-2 font-weight-bold">
+                            <?php echo html_escape($destination->widget_title); ?> 5555 </h2>
+                        <div class="sub-title fs-18">
+                            <?php echo html_escape($destination->widget_desc); ?>
+                        </div>
                     </div>
+                    <!-- /.End of section title -->
                 </div>
-                <!-- /.End of section title -->
+            </div>
+            <div class="destinations-carousel owl-carousel owl-theme">
+                <?php foreach ($banner_destination as $destination) { ?>
+                    <div class="card card-poster text-white flex-row align-items-end border-0">
+                        <a href="<?php echo html_escape($destination->slink); ?>"
+                            class="tile-link position-absolute w-100 h-100 top-0 left-0"></a>
+                        <img src="<?php echo html_escape(base_url() . (!empty($destination->image) ? $destination->image : 'assets/img/Home-page/explore_destinations.png')); ?>"
+                            alt="Card image" class="bg-image">
+                        <div class="card-body overlay-content position-relative">
+                            <div class="mb-3">
+                                <button type="button"
+                                    class="btn btn-primary btn-sm book-btn"><?php echo display('book_now') ?></button>
+                            </div>
+                            <span
+                                class="item-tag text-uppercase bg-white font-weight-500 mb-2 d-inline-block"><?php echo html_escape($destination->subtitle); ?></span>
+                            <h5 class="card-title font-weight-bold text-white"><?php echo html_escape($destination->title); ?>
+                            </h5>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
         </div>
-        <div class="destinations-carousel owl-carousel owl-theme">
-            <?php foreach ($banner_destination as $destination) { ?>
-                <div class="card card-poster text-white flex-row align-items-end border-0">
-                    <a href="<?php echo html_escape($destination->slink); ?>"
-                        class="tile-link position-absolute w-100 h-100 top-0 left-0"></a>
-                    <img src="<?php echo html_escape(base_url() . (!empty($destination->image) ? $destination->image : 'assets/img/Home-page/explore_destinations.png')); ?>"
-                        alt="Card image" class="bg-image">
-                    <div class="card-body overlay-content position-relative">
-                        <div class="mb-3">
-                            <button type="button"
-                                class="btn btn-primary btn-sm book-btn"><?php echo display('book_now') ?></button>
-                        </div>
-                        <span
-                            class="item-tag text-uppercase bg-white font-weight-500 mb-2 d-inline-block"><?php echo html_escape($destination->subtitle); ?></span>
-                        <h5 class="card-title font-weight-bold text-white"><?php echo html_escape($destination->title); ?>
-                        </h5>
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
-
     </div>
-</div>
+<?php endif; ?>
 <!-- /.End of destination -->

@@ -1,8 +1,12 @@
 <div class="row">
     <div class="col-sm-12 col-md-12">
         <div class="card">
-            <div class="card-header">
-                <h6><?php echo display("home_section_2") ?></h6>    
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h6 class="mb-0"><?php echo display("home_section_2"); ?></h6>
+                <div class="d-flex align-items-center">
+                    <label class="mb-0 me-2"><?php echo display('visible_home'); ?></label>
+                    <input type="checkbox" class="form-check-input" id="visible_status" onclick="visible_home(this, 'home_about_visible_status')" <?php echo $visible_status ? 'checked' : ''; ?>>
+                </div>
             </div>
             <div class="card-body">
                 <!-- language -->
@@ -18,38 +22,38 @@
                         </thead>
                         <tbody>
                             <?php if (!empty($team_title)) { ?>
-                            <?php $sl = 1 ?>
-                            <tr>
-                                <td><?php echo $sl++ ?></td>
-                                <td><?php echo html_escape($team_title->widget_title); ?></td>
-                                <td><?php echo html_escape($team_title->widget_desc); ?></td>
-                                <td class="text-center">
-                                    <a href="javascript:void(0)"
-                                        onclick="homeabouttitle_edit('<?php echo html_escape($team_title->widgetid); ?>')"
-                                        class="btn btn-primary custom_btn"><i class="ti-pencil-alt"></i></a>
-                                </td>
-                            </tr>
+                                <?php $sl = 1 ?>
+                                <tr>
+                                    <td><?php echo $sl++ ?></td>
+                                    <td><?php echo html_escape($team_title->widget_title); ?></td>
+                                    <td><?php echo html_escape($team_title->widget_desc); ?></td>
+                                    <td class="text-center">
+                                        <a href="javascript:void(0)"
+                                            onclick="homeabouttitle_edit('<?php echo html_escape($team_title->widgetid); ?>')"
+                                            class="btn btn-primary custom_btn"><i class="ti-pencil-alt"></i></a>
+                                    </td>
+                                </tr>
                             <?php } ?>
                             <?php if (!empty($team_title)) { ?>
-                            <?php $sl = 2 ?>
-                            <tr>
-                                <td><?php echo $sl++ ?></td>
-                                <td></td>
-                                <td><?php echo html_escape($team_title1->widget_desc); ?></td>
-                                <td class="text-center">
-                                    <a href="javascript:void(0)"
-                                        onclick="homeabouttitle_edit('<?php echo html_escape($team_title1->widgetid); ?>')"
-                                        class="btn btn-primary custom_btn"><i class="ti-pencil-alt"></i></a>
-                                </td>
-                            </tr>
+                                <?php $sl = 2 ?>
+                                <tr>
+                                    <td><?php echo $sl++ ?></td>
+                                    <td></td>
+                                    <td><?php echo html_escape($team_title1->widget_desc); ?></td>
+                                    <td class="text-center">
+                                        <a href="javascript:void(0)"
+                                            onclick="homeabouttitle_edit('<?php echo html_escape($team_title1->widgetid); ?>')"
+                                            class="btn btn-primary custom_btn"><i class="ti-pencil-alt"></i></a>
+                                    </td>
+                                </tr>
                             <?php } ?>
                         </tbody>
                         <tfoot>
                             <?php if (empty($team_title)) { ?>
-                            <tr>
-                                <th colspan="6" class="text-center text-danger">
-                                    <?php echo display('record_not_found'); ?></th>
-                            </tr>
+                                <tr>
+                                    <th colspan="6" class="text-center text-danger">
+                                        <?php echo display('record_not_found'); ?></th>
+                                </tr>
                             <?php } ?>
                         </tfoot>
                     </table>
@@ -68,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-sm" language_list>
@@ -93,13 +97,13 @@
                                         <td><?php echo html_escape($company->width) ?>px</td>
                                         <td><?php echo html_escape($company->height) ?>px</td>
                                         <td class="text-center">
-                                            <a href="javascript:void(0)" onclick="homeaboutimage_edit('<?php echo html_escape($company->slid); ?>')" class="btn btn-primary custom_btn"><i class="ti-pencil-alt"></i></a>  
+                                            <a href="javascript:void(0)" onclick="homeaboutimage_edit('<?php echo html_escape($company->slid); ?>')" class="btn btn-primary custom_btn"><i class="ti-pencil-alt"></i></a>
 
-                                        </td> 
+                                        </td>
                                     </tr>
                                 <?php } ?>
                             <?php } ?>
-                        </tbody> 
+                        </tbody>
                         <tfoot>
                             <?php if (empty($company_list)) { ?>
                                 <tr>
@@ -107,7 +111,7 @@
                                 </tr>
                             <?php } ?>
                         </tfoot>
-                    </table>  
+                    </table>
                 </div>
                 <!-- The Modal -->
                 <div class="modal fade" id="homeabout_info" role="dialog">
@@ -119,7 +123,7 @@
                             </div>
                             <div class="modal-body" id="homeabout">
 
-                            </div>                    
+                            </div>
                         </div>
                     </div>
                 </div>

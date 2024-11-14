@@ -5,7 +5,7 @@
                 <h6 class="mb-0"><?php echo display("home_section_3"); ?></h6>
                 <div class="d-flex align-items-center">
                     <label class="mb-0 me-2"><?php echo display('visible_home'); ?></label>
-                    <input type="checkbox" class="form-check-input" id="visible_status" onclick="top_offer_visible_home()" <?php echo $visible_status ? 'checked' : ''; ?>>
+                    <input type="checkbox" class="form-check-input" id="visible_status" onclick="visible_home(this, 'top_offer_visible_status')" <?php echo $visible_status ? 'checked' : ''; ?>>
                 </div>
             </div>
             <div class="card-body">
