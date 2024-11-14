@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     "use strict";
     //        ========== its start for when submit to save use php then auto click the ===============

@@ -113,6 +113,9 @@
                             I understand that this action will permanently delete all data from the selected tables.
                         </label>
                     </div>
+                    <div>
+                        <input type="password" id="adminPassword" class="form-control col-4" placeholder="Enter password" disabled>
+                    </div>
                     <button type="submit" class="btn btn-danger mt-3" id="truncateButton" disabled>Truncate Tables</button>
                 </form>
 
@@ -120,7 +123,7 @@
                     <div id="progressBar" class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
                 </div>
 
-                <div id="message" class="mt-3"></div>
+                <div id="message" class="mt-3 text-danger"></div>
             </div>
         </div>
     </div>
@@ -130,9 +133,15 @@
     // Enable the button only if the checkbox is checked
     const checkbox = document.getElementById('confirmCheckbox');
     const button = document.getElementById('truncateButton');
+    const password = document.getElementById('adminPassword');
 
     checkbox.addEventListener('change', function() {
         button.disabled = !this.checked;
+        password.disabled = !this.checked;
+        password.value = '';
+    });
+    password.addEventListener('keyup', function() {
+        button.disabled = !this.value;
     });
     var csrf = $('#csrf_token').val();
     var baseurl = $('#base_url').val() + 'dashboard/setting/truncate_table';
@@ -140,6 +149,7 @@
     $(document).ready(function() {
         $('#truncateForm').submit(function(event) {
             event.preventDefault();
+            $('#adminPassword').val()
             var selectedTables = [];
 
             $('input[type="checkbox"]:checked').each(function() {
@@ -149,23 +159,27 @@
             var totalTables = selectedTables.length;
             var progressPerTable = 100 / totalTables;
             var progress = 0;
-            swal({
-                    title: "Confirmation",
-                    text: "Are you sure you want to submit?",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#28a745",
-                    confirmButtonText: "Yes",
-                    cancelButtonText: "No",
-                    closeOnConfirm: true,
-                    closeOnCancel: true
-                },
-                function(isConfirm) {
-                    if (isConfirm) {
-                        $('#message').text("Truncating tables...");
-                        backupDatabase(selectedTables, progressPerTable, progress, totalTables);
-                    }
-                });
+            if (!$('#adminPassword').val()) {
+                $('#message').text('Password arguments required');
+            } else {
+                swal({
+                        title: "Confirmation",
+                        text: "Are you sure you want to submit?",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#28a745",
+                        confirmButtonText: "Yes",
+                        cancelButtonText: "No",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                    function(isConfirm) {
+                        if (isConfirm) {
+                            passwordCheck(selectedTables, progressPerTable, progress, totalTables);
+                        }
+                    });
+            }
+
         });
 
         function truncateTables(tables, progressPerTable, progress, totalTables) {
@@ -200,6 +214,7 @@
         }
 
         function backupDatabase(selectedTables, progressPerTable, progress, totalTables) {
+            $('#message').text("Truncating tables...");
             $.ajax({
                 url: $('#base_url').val() + 'dashboard/autoupdate/download_backup',
                 type: 'POST',
@@ -212,6 +227,30 @@
                 },
                 error: function() {
                     alert('Error truncating');
+                }
+            });
+        }
+
+        function passwordCheck(selectedTables, progressPerTable, progress, totalTables) {
+            $('#message').text('Password checking...');
+            $.ajax({
+                url: $('#base_url').val() + 'dashboard/auth/password_check',
+                type: 'POST',
+                data: {
+                    csrf_test_name: csrf,
+                    password: $('#adminPassword').val()
+                },
+                success: function(response) {
+                    let data = JSON.parse(response);
+                    if (data.status) {
+                        $('#message').text('You are valid user, thanks');
+                        backupDatabase(selectedTables, progressPerTable, progress, totalTables);
+                    } else {
+                        $('#message').text('Invalid password');
+                    }
+                },
+                error: function() {
+                    alert('Error checking password');
                 }
             });
         }
