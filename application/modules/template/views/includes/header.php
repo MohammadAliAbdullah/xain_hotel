@@ -20,7 +20,13 @@
     <div class="navbar-icon d-flex">
         <ul class="navbar-nav flex-row align-items-center">
             <div class="">
-                <a href="<?php echo base_url('') ?>" target="_blank" class="btn btn-success"><?php echo display('website') ?></a>
+                <a href="<?php echo base_url('') ?>" target="_blank" class="btn btn-success mr-1"><?php echo display('website') ?></a>
+            </div>
+            <div class="">
+                <a href="<?php echo base_url('room_reservation/checkin-list') ?>" target="_blank" class="btn btn-info mr-1"><?php echo display('customer') . ' ' . display('invoice'); ?></a>
+            </div>
+            <div class="">
+                <a href="<?php echo base_url('reports/booking-report'); ?>" target="_blank" class="btn btn-dark"><?php echo display('booking_report'); ?></a>
             </div>
             <?php 
             $checkModule = $this->db->where('directory', 'day_closing')->where('status', 1)->get('module')->num_rows(); if ($checkModule == 1) {
