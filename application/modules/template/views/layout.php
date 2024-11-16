@@ -92,7 +92,7 @@
                     </div>
                 </div>
             </footer>
-            <input type="hidden" id="productmode" value="">
+            <input type="hidden" id="productmode" value="demo">
             <!--/.footer content-->
             <div class="overlay"></div>
         </div>

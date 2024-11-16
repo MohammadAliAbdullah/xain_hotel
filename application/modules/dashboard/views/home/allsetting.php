@@ -774,5 +774,6 @@
     <!-- Inline form -->
 </div>
 <input type="hidden" id="uri" value="<?php echo $this->uri->segment('2'); ?>">
-<input type="hidden" id="productmode" value="">
-<script src="<?php echo base_url('application/modules/dashboard/assets/js/settings.js?v==3') ?>"></script>
+<input type="hidden" id="productmode" value="demo">
+<!--<script src="<?php //echo base_url('application/modules/dashboard/assets/js/settings.js?v==4') ?>"></script>-->
+<script src="<?php echo base_url(); ?>application/modules/dashboard/assets/js/settings.js?v=<?php echo date('d');?>"></script>
