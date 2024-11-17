@@ -1241,6 +1241,7 @@ class Setting extends MX_Controller
     {
         $company_id = $this->input->post('company_id', true);
         $title = $this->input->post('title', true);
+        $subtitle = $this->input->post('sub_title', true);
         $width = $this->input->post('width', true);
         $height = $this->input->post('height', true);
         $banner = $this->fileupload->do_upload(
@@ -1264,6 +1265,7 @@ class Setting extends MX_Controller
         if (!empty($banner)) {
             $teammember_data = array(
                 'title' => $title,
+                'subtitle' => $subtitle,
                 'width' => $width,
                 'height' => $height,
                 'image' => $banner,
@@ -1272,6 +1274,7 @@ class Setting extends MX_Controller
         } else {
             $teammember_data = array(
                 'title' => $title,
+                'subtitle' => $subtitle,
                 'width' => $width,
                 'height' => $height,
             );

@@ -3125,6 +3125,7 @@ function checkoutimage_update(company_id) {
     var picture = $("#checkout_picture")[0].files[0];
     var base_url = $("#base_url").val();
     fd.append('title', $("#checkout_title").val());
+    fd.append('sub_title', $("#checkout_subtitle").val());
     fd.append('width', $("#checkout_width").val());
     fd.append('height', $("#checkout_height").val());
     fd.append('picture', picture);
